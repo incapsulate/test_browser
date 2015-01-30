@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pusher Test</title>
+  <script src="js/pusher.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      //alert(message);
+    };
+	var msg = '';
+    var pusher = new Pusher('838aaf1cb859e6951945');
+    var channel = pusher.subscribe('test_channel');
+	var response = document.getElementById('response');
+    channel.bind('my_event', function (data){
+		//response.textContent = response.textContent + data.message;	
+		if (msg == ''){
+			msg = data.message;
+		}
+		else{
+			msg = msg + ' | ' + data.message;
+		}
+		
+		//return data.message;
+	});	
+	function test(){
+		return msg;	
+		//return 'asda';
+	}
+	//msg = msg + ' FINISH';
+  </script>
+</head>
+<body>
+	<span id="response"> 
+    	
+    </span>
+</body>
+</html>
